@@ -1,5 +1,7 @@
 OS Development Dev Kit
+
 Made by EdvinasDev_98, 2025
+
 Project files are open-sourced. Please feel free to use them.
 
 Required Tools:
