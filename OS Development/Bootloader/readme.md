@@ -21,6 +21,9 @@ Example Files:
     PrintCharacters.asm
     Prints characters from A-Z, a-z, and 0-9 using BIOS interrupts.
 
+    CheckRAM.asm
+    Check and display RAM size up to 1 MB (typically around 640 KB).
+
 Compilation & Testing:
 
     To Compile a Bootloader
