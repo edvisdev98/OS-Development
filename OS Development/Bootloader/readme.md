@@ -22,14 +22,15 @@ Example Files:
     Prints characters from A-Z, a-z, and 0-9 using BIOS interrupts.
 
 Compilation & Testing:
+
     To Compile a Bootloader
-    
     Use NASM to assemble the .asm file into a raw binary .img:
+    
     nasm -f bin <filename>.asm -o <outputname>.img
 
     To Run the Bootloader in QEMU:
-    
     Use QEMU to boot and test your .img file:
+    
     qemu-system-x86_64 -fda <outputname>.img
 
 Happy Coding!
