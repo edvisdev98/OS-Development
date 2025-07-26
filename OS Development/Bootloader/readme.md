@@ -23,12 +23,14 @@ Example Files:
 
 Compilation & Testing:
     To Compile a Bootloader
+    
     Use NASM to assemble the .asm file into a raw binary .img:
-        nasm -f bin <filename>.asm -o <outputname>.img
+    nasm -f bin <filename>.asm -o <outputname>.img
 
     To Run the Bootloader in QEMU:
+    
     Use QEMU to boot and test your .img file:
-        qemu-system-x86_64 -fda <outputname>.img
+    qemu-system-x86_64 -fda <outputname>.img
 
 Happy Coding!
 This dev kit is designed to help you get started with low-level OS development. Explore, experiment, and have fun creating your own bootloaders and eventually - your own operating system!
