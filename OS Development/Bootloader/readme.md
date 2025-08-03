@@ -17,13 +17,16 @@ Example Files:
     Inside the Examples/ folder, you will find bootloader examples:
 
     HelloWorld.asm
+    
     Prints "Hello World!" to the screen.
     Includes beginner-friendly comments to help you understand the code.
 
     PrintCharacters.asm
+    
     Prints characters from A-Z, a-z, and 0-9 using BIOS interrupts.
 
     CheckRAM.asm
+    
     Check and display RAM size up to 1 MB (typically around 640 KB).
 
 Compilation & Testing:
@@ -40,4 +43,5 @@ Compilation & Testing:
 
 Happy Coding!
 This dev kit is designed to help you get started with low-level OS development. Explore, experiment, and have fun creating your own bootloaders and eventually - your own operating system!
+
 
