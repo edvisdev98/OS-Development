@@ -29,13 +29,17 @@ Example Files:
     
     Check and display RAM size up to 1 MB (typically around 640 KB).
 
+    ClearScreen.asm
+
+    Clears the entire text-mode screen by filling it with blank spaces and a specified color attribute. Resets the cursor position to the top-left corner (row 0, column 0). Uses direct video memory access and BIOS interrupts to manipulate the screen and cursor.
+
     BackgroundColor.asm
 
-    Changes the background color.
+    Changes the background color of the entire text-mode screen by directly writing blank spaces with the specified background color attribute into video memory.
 
     TextFontColor.asm
 
-    Changes the text font color.
+    Changes the color of the text (foreground) displayed on the screen while leaving the background color unchanged.
 
     (Note: VGA Color Codes for Text Mode.xlsx includes a table listing HEX color codes for use with BackgroundColor.asm and TextFontColor.asm.)
 
@@ -53,6 +57,7 @@ Compilation & Testing:
 
 Happy Coding!
 This dev kit is designed to help you get started with low-level OS development. Explore, experiment, and have fun creating your own bootloaders and eventually - your own operating system!
+
 
 
 
