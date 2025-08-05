@@ -51,7 +51,7 @@ Example Files:
 
     Changes the color of the text (foreground) displayed on the screen while leaving the background color unchanged.
 
-    (Note: VGA Color Codes for Text Mode.xlsx includes a table listing HEX color codes for use with BackgroundColor.asm and TextFontColor.asm.)
+(Note: VGA Color Codes for Text Mode.jpg includes a table listing HEX color codes for use with BackgroundColor.asm and TextFontColor.asm.)
 
 Compilation & Testing:
 
@@ -67,6 +67,7 @@ Compilation & Testing:
 
 Happy Coding!
 This dev kit is designed to help you get started with low-level OS development. Explore, experiment, and have fun creating your own bootloaders and eventually - your own operating system!
+
 
 
 
