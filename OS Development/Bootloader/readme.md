@@ -21,13 +21,19 @@ Example Files:
     Prints "Hello World!" to the screen.
     Includes beginner-friendly comments to help you understand the code.
 
+    -
+
     PrintCharacters.asm
     
     Prints characters from A-Z, a-z, and 0-9 using BIOS interrupts.
 
+    -
+
     CheckRAM.asm
     
     Check and display RAM size up to 1 MB (typically around 640 KB).
+
+    -
 
     ClearScreen.asm
 
@@ -35,7 +41,11 @@ Example Files:
 
     BackgroundColor.asm
 
+    -
+
     Changes the background color of the entire text-mode screen by directly writing blank spaces with the specified background color attribute into video memory.
+
+    -
 
     TextFontColor.asm
 
@@ -57,6 +67,7 @@ Compilation & Testing:
 
 Happy Coding!
 This dev kit is designed to help you get started with low-level OS development. Explore, experiment, and have fun creating your own bootloaders and eventually - your own operating system!
+
 
 
 
