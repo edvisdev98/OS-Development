@@ -11,7 +11,7 @@ printr:
                                                                 ; is practically recommended.
     push bx
 .Lputlp:
-    lodsb							; Loads byte pointed to by SI (Source Index) into AX (Accumulator), advances SI.
+    lodsb                                                       ; Loads byte pointed to by SI (Source Index) into AX (Accumulator), advances SI.
     ;; If the AX (Lower) equal to zero, we have reached the null terminator
     ;; and must abort to avoid endlessly writing 'random' bytes.
     or al, al
