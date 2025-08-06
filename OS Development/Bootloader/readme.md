@@ -61,17 +61,19 @@ Inside the `Examples/` folder, you will find bootloader examples:
 
 ## ⚙️ Compilation & Testing
 
+``` bash
 To Compile a Bootloader: 
 Use NASM to assemble the `.asm` file into a raw binary `.img`:
 
 nasm -f bin <filename>.asm -o <filename>.img
 
-----
+---
 
 To Run the Bootloader in QEMU:
 Use QEMU to boot and test your `.img` file:
 
 qemu-system-x86_64 -fda <filename>.img
+
 
 
 
