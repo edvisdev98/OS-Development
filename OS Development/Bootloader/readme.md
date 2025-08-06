@@ -11,7 +11,7 @@ Required Tools:
 
     QEMU - Virtual machine emulator for testing and running your custom bootloader.
 
-    Note: After installing the tools, make sure to add them to your system environment variables so you can run them from any terminal or command prompt.
+Note: After installing the tools, make sure to add them to your system environment variables so you can run them from any terminal or command prompt.
 
 Example Files:
     Inside the Examples/ folder, you will find bootloader examples:
@@ -21,31 +21,31 @@ Example Files:
     Prints "Hello World!" to the screen.
     Includes beginner-friendly comments to help you understand the code.
 
-    -
+    --------------------------------------
 
     PrintCharacters.asm
     
     Prints characters from A-Z, a-z, and 0-9 using BIOS interrupts.
 
-    -
+    --------------------------------------
 
     CheckRAM.asm
     
     Check and display RAM size up to 1 MB (typically around 640 KB).
 
-    -
+    --------------------------------------
 
     ClearScreen.asm
 
     Clears the entire text-mode screen by filling it with blank spaces and a specified color attribute. Resets the cursor position to the top-left corner (row 0, column 0). Uses direct video memory access and BIOS interrupts to manipulate the screen and cursor.
 
-    BackgroundColor.asm
+    --------------------------------------
 
-    -
+    BackgroundColor.asm 
 
     Changes the background color of the entire text-mode screen by directly writing blank spaces with the specified background color attribute into video memory.
 
-    -
+   -------------------------------------- 
 
     TextFontColor.asm
 
@@ -67,6 +67,7 @@ Compilation & Testing:
 
 Happy Coding!
 This dev kit is designed to help you get started with low-level OS development. Explore, experiment, and have fun creating your own bootloaders and eventually - your own operating system!
+
 
 
 
