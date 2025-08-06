@@ -1,72 +1,52 @@
-OS Development Dev Kit
+# 🛠️ OS Development Dev Kit
 
-Made by EdvinasDev_98, 2025
+**Made by EdvinasDev_98, 2025**
 
 Project files are open-sourced. Please feel free to use them.
 
-Required Tools:
-    Before getting started, please download and install the following tools:
+---
 
-    NASM - Assembler used to compile .asm files into bootable .img files.
+## 🧰 Required Tools
 
-    QEMU - Virtual machine emulator for testing and running your custom bootloader.
+Before getting started, please download and install the following tools:
 
-    Note: After installing the tools, make sure to add them to your system environment variables so you can run them from any terminal or command prompt.
+- **NASM** – Assembler used to compile `.asm` files into bootable `.img` files.
+- **QEMU** – Virtual machine emulator for testing and running your custom bootloader.
 
-Example Files:
-    Inside the Examples/ folder, you will find bootloader examples:
+> **Note:** After installing the tools, make sure to add them to your system environment variables so you can run them from any terminal or command prompt.
 
-    HelloWorld.asm
-    
-    Prints "Hello World!" to the screen.
-    Includes beginner-friendly comments to help you understand the code.
+---
 
-    -
+## 📁 Example Files
 
-    PrintCharacters.asm
-    
-    Prints characters from A-Z, a-z, and 0-9 using BIOS interrupts.
+Inside the `Examples/` folder, you will find bootloader examples:
 
-    -
+| **File Name**             | **Description** |
+|--------------------------|-----------------|
+| **HelloWorld.asm**     | - Prints **"Hello World!"** to the screen.<br>- Includes beginner-friendly comments to help you understand the code. |
+| **PrintCharacters.asm**| - Prints characters from **A-Z, a-z, and 0-9** using BIOS interrupts. |
+| **CheckRAM.asm**       | - Checks and displays RAM size up to **1 MB** (typically around 640 KB). |
+| **ClearScreen.asm**    | - Clears the entire **text-mode screen** by filling it with blank spaces and a specified color attribute.<br>- Resets the cursor position to the **top-left corner** (row 0, column 0).<br>- Uses **direct video memory access** and BIOS interrupts to manipulate the screen and cursor. |
+| **BackgroundColor.asm**| - Changes the **background color** of the entire text-mode screen.<br>- Directly writes blank spaces with the specified background color attribute into video memory. |
+| **TextFontColor.asm**  | - Changes the **text (foreground) color** displayed on the screen while leaving the background color unchanged. |
 
-    CheckRAM.asm
-    
-    Check and display RAM size up to 1 MB (typically around 640 KB).
+(Note: `VGA Color Codes.jpg` and `VGA Color Codes Combinations.jpg` includes a table listing HEX color codes and combinations for use with `BackgroundColor.asm` and `TextFontColor.asm`.)
 
-    -
+---
 
-    ClearScreen.asm
+## ⚙️ Compilation & Testing
 
-    Clears the entire text-mode screen by filling it with blank spaces and a specified color attribute. Resets the cursor position to the top-left corner (row 0, column 0). Uses direct video memory access and BIOS interrupts to manipulate the screen and cursor.
+To Compile a Bootloader: 
+- Use NASM to assemble the `.asm` file into a raw binary `.img`:
 
-    BackgroundColor.asm
+  *nasm -f bin <filename>.asm -o <filename>.img*
 
-    -
+---
 
-    Changes the background color of the entire text-mode screen by directly writing blank spaces with the specified background color attribute into video memory.
+To Run the Bootloader in QEMU:
+- Use QEMU to boot and test your `.img` file:
 
-    -
-
-    TextFontColor.asm
-
-    Changes the color of the text (foreground) displayed on the screen while leaving the background color unchanged.
-
-(Note: VGA Color Codes for Text Mode.jpg includes a table listing HEX color codes for use with BackgroundColor.asm and TextFontColor.asm.)
-
-Compilation & Testing:
-
-    To Compile a Bootloader
-    Use NASM to assemble the .asm file into a raw binary .img:
-    
-    nasm -f bin <filename>.asm -o <filename>.img
-
-    To Run the Bootloader in QEMU:
-    Use QEMU to boot and test your .img file:
-    
-    qemu-system-x86_64 -fda <filename>.img
-
-Happy Coding!
-This dev kit is designed to help you get started with low-level OS development. Explore, experiment, and have fun creating your own bootloaders and eventually - your own operating system!
+  *qemu-system-x86_64 -fda <filename>.img*
 
 
 
