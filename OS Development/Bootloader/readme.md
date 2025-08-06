@@ -67,9 +67,12 @@ Use NASM to assemble the `.asm` file into a raw binary `.img`:
 ```bash
 nasm -f bin <filename>.asm -o <filename>.img
 
+---
+
 ### ✅ To Run the Bootloader in QEMU
 Use QEMU to boot and test your `.img` file:
 
 ```bash
 qemu-system-x86_64 -fda <filename>.img
+
 
