@@ -13,10 +13,12 @@ BUILD_DIR ?= build
 # Targets
 #
 
-.PHONY: build
+.PHONY: setup build
 
 build: $(BUILD_DIR)/boot.img
 
-$(BUILD_DIR)/boot.img: $(ASM_SOURCES)
+$(BUILD_DIR)/boot.img: $(ASM_SOURCES) | setup
 	$(ASM) $(ASM_FLAGS) $^ -o $(BUILD_DIR)/boot.img
 
+setup:
+	mkdir -p $(BUILD_DIR)

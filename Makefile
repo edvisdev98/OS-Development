@@ -9,7 +9,7 @@ BUILD_DIR = build
 # Targets
 #
 
-.PHONY: setup build
+.PHONY: setup build clean
 
 build: bootloader
 
