@@ -1,50 +1,68 @@
 # 🛠️ OS Development Dev Kit
 
-**Created by [EdvinasDev_98](https://github.com/EdvinasDev_98) — 2025**
+**Made by EdvinasDev_98, 2025**
 
-Welcome to the **OS Development Dev Kit** — a simple starter pack to help you begin your journey into low-level OS development. This kit includes bootloader examples, essential tools, and guidance to get you up and running quickly.
-
----
-
-## 📂 Project Status
-
-> ✅ Open-source and ready to use!
-
-Feel free to fork, modify, or use any of the files for your personal or professional projects.
+Project files are open-sourced. Please feel free to use them.
 
 ---
 
 ## 🧰 Required Tools
 
-Before you begin, make sure you have the following installed:
+Before getting started, please download and install the following tools:
 
-- **[NASM](https://www.nasm.us/)** – Assembler for compiling `.asm` files into bootable `.img` files.
-- **[QEMU](https://www.qemu.org/)** – Virtual machine emulator to test your custom bootloader.
+- **NASM** – Assembler used to compile `.asm` files into bootable `.img` files.
+- **QEMU** – Virtual machine emulator for testing and running your custom bootloader.
 
-> **Note:** After installing, add both NASM and QEMU to your system's PATH so they are accessible via terminal/command prompt.
+> **Note:** After installing the tools, make sure to add them to your system environment variables so you can run them from any terminal or command prompt.
 
 ---
 
-## 📁 Example Bootloaders
+## 📁 Example Files
 
-Explore the `Examples/` folder for well-documented `.asm` files:
+Inside the `Examples/` folder, you will find bootloader examples:
 
-| Filename              | Description |
-|-----------------------|-------------|
-| `HelloWorld.asm`      | Prints "Hello World!" to the screen. Great starting point with beginner-friendly comments. |
-| `PrintCharacters.asm` | Displays characters A-Z, a-z, and 0-9 using BIOS interrupts. |
-| `CheckRAM.asm`        | Checks and displays RAM size (up to ~640 KB using BIOS). |
-| `ClearScreen.asm`     | Clears the screen and resets the cursor using video memory and BIOS interrupts. |
-| `BackgroundColor.asm` | Changes the screen background color using direct video memory writes. |
-| `TextFontColor.asm`   | Alters the text (foreground) color while preserving the background. |
+---
 
-> 📌 **Tip:** Check the included `VGA Color Codes for Text Mode.jpg` for hex color reference.
+### 🔹 HelloWorld.asm
+- Prints **"Hello World!"** to the screen.
+- Includes beginner-friendly comments to help you understand the code.
+
+---
+
+### 🔹 PrintCharacters.asm
+- Prints characters from **A-Z, a-z, and 0-9** using BIOS interrupts.
+
+---
+
+### 🔹 CheckRAM.asm
+- Checks and displays RAM size up to **1 MB** (typically around 640 KB).
+
+---
+
+### 🔹 ClearScreen.asm
+- Clears the entire **text-mode screen** by filling it with blank spaces and a specified color attribute.
+- Resets the cursor position to the **top-left corner** (row 0, column 0).
+- Uses **direct video memory access** and BIOS interrupts to manipulate the screen and cursor.
+
+---
+
+### 🔹 BackgroundColor.asm
+- Changes the **background color** of the entire text-mode screen.
+- Directly writes blank spaces with the specified background color attribute into video memory.
+
+---
+
+### 🔹 TextFontColor.asm
+- Changes the **text (foreground) color** displayed on the screen while leaving the background color unchanged.
+
+> **Note:** `VGA Color Codes for Text Mode.jpg` includes a table listing HEX color codes for use with `BackgroundColor.asm` and `TextFontColor.asm`.
 
 ---
 
 ## ⚙️ Compilation & Testing
 
-### 🧱 To Compile a Bootloader:
+### ✅ To Compile a Bootloader
+Use NASM to assemble the `.asm` file into a raw binary `.img`:
 
 ```bash
 nasm -f bin <filename>.asm -o <filename>.img
