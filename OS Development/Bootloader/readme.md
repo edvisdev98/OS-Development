@@ -11,7 +11,7 @@ Required Tools:
 
     QEMU - Virtual machine emulator for testing and running your custom bootloader.
 
-Note: After installing the tools, make sure to add them to your system environment variables so you can run them from any terminal or command prompt.
+(Note: After installing the tools, make sure to add them to your system environment variables so you can run them from any terminal or command prompt.)
 
 Example Files:
     Inside the Examples/ folder, you will find bootloader examples:
@@ -45,7 +45,7 @@ Example Files:
 
     Changes the background color of the entire text-mode screen by directly writing blank spaces with the specified background color attribute into video memory.
 
-   -------------------------------------- 
+    -------------------------------------- 
 
     TextFontColor.asm
 
@@ -67,6 +67,7 @@ Compilation & Testing:
 
 Happy Coding!
 This dev kit is designed to help you get started with low-level OS development. Explore, experiment, and have fun creating your own bootloaders and eventually - your own operating system!
+
 
 
 
