@@ -30,6 +30,7 @@ Inside the `Examples/` folder, you will find bootloader examples:
 | **BackgroundColor.asm**| - Changes the **background color** of the entire text-mode screen.<br>- Directly writes blank spaces with the specified background color attribute into video memory. |
 | **TextFontColor.asm**  | - Changes the **text (foreground) color** displayed on the screen while leaving the background color unchanged. |
 
+---
 *Note:* `VGA Color Codes for Text Mode.jpg` includes a table listing HEX color codes for use with `BackgroundColor.asm` and `TextFontColor.asm`.
 ---
 
@@ -46,5 +47,6 @@ To Run the Bootloader in QEMU:
 - Use QEMU to boot and test your `.img` file:
 
 - qemu-system-x86_64 -fda <filename>.img
+
 
 
