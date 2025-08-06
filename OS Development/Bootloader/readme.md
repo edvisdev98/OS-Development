@@ -73,8 +73,3 @@ To Run the Bootloader in QEMU:
 Use QEMU to boot and test your `.img` file:
 
 qemu-system-x86_64 -fda <filename>.img
-
-
-
-
-
