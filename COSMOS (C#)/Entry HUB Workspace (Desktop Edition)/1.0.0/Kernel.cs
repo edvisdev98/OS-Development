@@ -55,10 +55,6 @@ public class Kernel : Sys.Kernel
     private bool showColorWindow = false;
     private bool showFilesWindow = false;
 
-    private string currentPath = "0:\\";
-    private string[] currentEntries = new string[0];
-    private int fileListScroll = 0;
-
     private bool lastLeftButtonState = false;
 
     private bool caretVisible = true;
@@ -161,8 +157,6 @@ public class Kernel : Sys.Kernel
             var win = windows[i];
             if (!win.IsOpen) continue;
 
-            HandleWindowUserInteraction(win, mouseX, mouseY, leftButtonPressed, width, height);
-
             DrawFilledRectangle(win.Rect, Color.LightGray, width, height);
             DrawRectangleBorder(win.Rect, Color.Black, width, height);
 
@@ -176,12 +170,6 @@ public class Kernel : Sys.Kernel
 
             DrawAlignedString("Entry HUB", font, Color.White, new Rectangle(win.Rect.X + 5, win.Rect.Y, 100, 30), width, height, alignLeft: true);
             DrawAlignedString(windowTitles[i], font, Color.White, win.TitleTextRect, width, height, alignLeft: false);
-
-            if (buttonLabels[i] == "Notebook")
-            {
-                HandleNotebookInput(i);
-                DrawNotebookText(win.Rect, windowText[i], font, width, height, notebookCaretPos[i]);
-            }
         }
 
         DrawCursor(mouseX, mouseY, cursorColor, width, height);
@@ -227,117 +215,6 @@ public class Kernel : Sys.Kernel
     {
         DrawButton(rect, bgColor, text, font, fgColor, (int)canvas.Mode.Width, (int)canvas.Mode.Height);
         return rect.Contains(mouseX, mouseY) && leftPressed && !lastLeftPressed;
-    }
-    private void HandleWindowUserInteraction(Window win, int mouseX, int mouseY, bool leftButtonPressed, int canvasWidth, int canvasHeight)
-    {
-        if (leftButtonPressed && !lastLeftButtonState)
-        {
-            if (win.CloseButtonRect.Contains(mouseX, mouseY))
-            {
-                win.IsOpen = false;
-                if (win == themeWindow) { showThemeWindow = false; }
-                if (win == colorWindow) { showColorWindow = false; }
-                if (win == filesWindow) { showFilesWindow = false; }
-                return;
-            }
-            else if (win.TitleBarRect.Contains(mouseX, mouseY))
-            {
-                win.IsDragging = true;
-                win.DragOffsetX = mouseX - win.Rect.X;
-                win.DragOffsetY = mouseY - win.Rect.Y;
-            }
-        }
-        else if (!leftButtonPressed)
-        {
-            win.IsDragging = false;
-        }
-
-        if (win.IsDragging)
-        {
-            win.Rect.X = Math.Max(0, Math.Min(mouseX - win.DragOffsetX, canvasWidth - win.Rect.Width));
-            win.Rect.Y = Math.Max(0, Math.Min(mouseY - win.DragOffsetY, canvasHeight - win.Rect.Height));
-        }
-    }
-
-    private void HandleNotebookInput(int notebookIndex)
-    {
-        KeyEvent keyEvent;
-        while (KeyboardManager.TryReadKey(out keyEvent))
-        {
-            char keyChar = keyEvent.KeyChar;
-
-            if (keyChar >= 32 && keyChar <= 126)
-            {
-                windowText[notebookIndex] = windowText[notebookIndex].Insert(notebookCaretPos[notebookIndex], keyChar.ToString());
-                notebookCaretPos[notebookIndex]++;
-            }
-            else if (keyEvent.Key == ConsoleKeyEx.Backspace && notebookCaretPos[notebookIndex] > 0)
-            {
-                windowText[notebookIndex] = windowText[notebookIndex].Remove(notebookCaretPos[notebookIndex] - 1, 1);
-                notebookCaretPos[notebookIndex]--;
-            }
-            else if (keyEvent.Key == ConsoleKeyEx.Delete && notebookCaretPos[notebookIndex] < windowText[notebookIndex].Length)
-            {
-                windowText[notebookIndex] = windowText[notebookIndex].Remove(notebookCaretPos[notebookIndex], 1);
-            }
-            else if (keyEvent.Key == ConsoleKeyEx.LeftArrow && notebookCaretPos[notebookIndex] > 0)
-            {
-                notebookCaretPos[notebookIndex]--;
-            }
-            else if (keyEvent.Key == ConsoleKeyEx.RightArrow && notebookCaretPos[notebookIndex] < windowText[notebookIndex].Length)
-            {
-                notebookCaretPos[notebookIndex]++;
-            }
-            else if (keyEvent.Key == ConsoleKeyEx.Enter)
-            {
-                windowText[notebookIndex] = windowText[notebookIndex].Insert(notebookCaretPos[notebookIndex], "\n");
-                notebookCaretPos[notebookIndex]++;
-            }
-        }
-    }
-
-    private void DrawNotebookText(Rectangle rect, string text, Font font, int canvasWidth, int canvasHeight, int caretPos)
-    {
-        int padding = 10;
-        int x = rect.X + padding;
-        int y = rect.Y + 40;
-        int lineHeight = font.Height;
-        int maxLines = (rect.Height - 50) / lineHeight;
-
-        string[] lines = text.Split('\n');
-        int currentCharIndex = 0;
-        int caretX = x;
-        int caretY = y;
-        bool caretDrawn = false;
-
-        for (int i = 0; i < lines.Length && i < maxLines; i++)
-        {
-            string line = lines[i];
-            canvas.DrawString(line, font, Color.Black, x, y);
-
-            if (!caretDrawn && caretPos <= currentCharIndex + line.Length)
-            {
-                int relativePos = caretPos - currentCharIndex;
-                caretX = x + relativePos * 8;
-                caretY = y;
-                caretDrawn = true;
-            }
-
-            currentCharIndex += line.Length + 1;
-            y += lineHeight;
-        }
-
-        if (!caretDrawn)
-        {
-            caretX = x + lines[lines.Length - 1].Length * 8;
-            caretY = rect.Y + 40 + (lines.Length - 1) * lineHeight;
-        }
-
-        if (caretVisible)
-        {
-            for (int dy = 0; dy < lineHeight; dy++)
-                canvas.DrawPoint(Color.Black, caretX, caretY + dy);
-        }
     }
 
     private void DrawButton(Rectangle rect, Color fillColor, string label, Font font, Color textColor, int canvasWidth, int canvasHeight)
