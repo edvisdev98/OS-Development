@@ -1,2 +1,2 @@
-Bootloader Examples & VGA Text Mode Colors References — by EdvinasDev_98
+Bootloader Examples & References — by EdvinasDev_98
 Main Bootloader — by rok3tt
