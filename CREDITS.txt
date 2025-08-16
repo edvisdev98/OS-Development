@@ -1,2 +1,2 @@
 Bootloader Examples & References — by EdvinasDev_98
-Main Bootloaders — by rok3tt
+Main Bootloader — by rok3tt
