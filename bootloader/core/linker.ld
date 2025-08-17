@@ -1,25 +1,35 @@
-/* Set the entry point to the `_start` symbol */
-ENTRY(_start)
+OUTPUT_FORMAT("binary") /*
+						The MBR partition is way too small to fit an ELF
+						loader, so instead the MBR gap will just contain raw bytes
+						*/
 
 SECTIONS {
-    . = 0x7E00; /* We expect the core image to be loaded right after MBR */
+	/*
+	CORE FORMAT:
+	- setup: 0x7E00, size: 256 bytes
+	- start: 0x7F00, size: ..
+	*/
+    . = 0x7F00;
 
+	/* Where out code sits */
 	.text : {
+		*(.text.early) /* Mostly to make sure the entry is always at the start */
 		*(.text)
 	}
 
-	.rodata : {
-		*(.rodata)
-	}
-	
-
-	.data : {
-		*(.data)
-	}
-
+	/* Uninitialized data, e.g. STACK */
 	.bss : {
 		*(.bss)
 		*(COMMON)
 	}
+
+	/* Read-only data */
+	.rodata : {
+		*(.rodata)
+	}
+
+	/* Read/write data */
+	.data : {
+		*(.data)
+	}
 }
-	

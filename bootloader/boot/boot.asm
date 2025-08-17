@@ -1,6 +1,6 @@
     org 0x7C00                                                  ; The BIOS loads the 512-byte boot sector at address 0x7C00.
     bits 16                                                     ; In legacy BIOS boot, we always begin in real mode. Meaning
-                                                                ; we are limited to 16-bit operands and instructions (not ideal on a >16-bit machine)
+                                                                ; we are limited to 16-bit operands & addresses (not ideal on a >16-bit machine)
     
 _start:
     ;; Setup data segments
@@ -27,7 +27,7 @@ _start:
     mov es, ax
     
     mov ah, 0x02                                                ; Use the BIOS read sectors from disk function for `int 0x13`
-    mov al, 2                                                   ; The amount of sectors to read. **FIXME**: make this set during build
+    mov al, 10                                                  ; The amount of sectors to read. **FIXME**: make this set during build (1 Sector = 512 bytes)
     mov ch, 0                                                   ; The specific cylinder to read, we shouldn't expect the core image
                                                                 ; to reach cylinder 1.. unless it's **REALLY** bloated---which is more of an issue
                                                                 ; than making this dynamic.
@@ -54,5 +54,4 @@ msg_hello_world: db '`Hello, World` from boot!', 0x0A, 0x0D, 0
                                                                 ; sector, nothing more and nothing less.
     dw 0xAA55                                                   ; Boot sector magic number - signifies it's bootable.
     
-buffer:								; Points to the address where the core image should be loaded
-    
+buffer:                                                         ; Points to the address where the core image should be loaded

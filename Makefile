@@ -1,20 +1,21 @@
-#
-# Configuration
-#
+CROSS_TOOLCHAIN ?=
+CC = gcc
+LD = ld
+override CC = $(CROSS_TOOLCHAIN)gcc
+override LD = $(CROSS_TOOLCHAIN)ld
 
-ASM = nasm
-BUILD_DIR = build
+BUILD_DIR ?= build
+override BUILD_DIR := $(abspath $(BUILD_DIR))
 
-#
-# Targets
-#
+export CROSS_TOOLCHAIN CC LD BUILD_DIR
 
-.PHONY: setup build clean
+.PHONY: build-bootloader
 
-build: bootloader
+build-bootloader: $(BUILD_DIR)/boot.bin \
+					$(BUILD_DIR)/core.bin
 
-bootloader: setup
-	$(MAKE) -C $@ ASM=$(ASM) BUILD_DIR=$(abspath $(BUILD_DIR))
+$(BUILD_DIR)/boot.bin:
+	$(MAKE) -C ./bootloader/boot
 
-setup:
-	mkdir -p $(BUILD_DIR)
+$(BUILD_DIR)/core.bin:
+	$(MAKE) -C ./bootloader/core
