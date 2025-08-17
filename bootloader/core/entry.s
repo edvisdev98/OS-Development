@@ -3,8 +3,8 @@ stack_bottom:
 	.skip 1024
 stack_top:
 
-.section .entry
-_entry:
+.section .text.early
+_start:
     /* Setup the stack */
     movl stack_top, %eax
     movl %eax, %esp
