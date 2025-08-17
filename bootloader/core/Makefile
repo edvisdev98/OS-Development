@@ -1,47 +1,40 @@
-#
-# Configuration
-#
+ASM ?= as
+override ASM := $(CROSS_TOOLCHAIN)$(ASM)
 
-BUILD_DIR ?= build
+.PHONY: build
 
-ASM ?= nasm
+build: $(BUILD_DIR)/core.bin
 
-CROSS_COMPILER ?= i386-elf-
-CC ?= $(CROSS_COMPILER)gcc
-LD ?= $(CROSS_COMPILER)ld
-
-ASMFLAGS ?= -felf32
-ASMSOURCES := entry.asm
-ASMOBJECTS = $(patsubst %.asm, $(BUILD_DIR)/core/%.o, $(ASMSOURCES))
-
-CFLAGS ?= -Wall -Wextra -ffreestanding
-CSOURCES :=
-COBJECTS = $(patsubst %.c, $(BUILD_DIR)/core/%.o, $(CSOURCES))
-
-LDFLAGS ?= -m elf_i386 -Tlinker.ld
-
-#
-# Targets
-#
-
-.PHONY: setup build link
-
-build: $(BUILD_DIR)/core.img
-
-# Link & copy the object files into a raw binary file.
-$(BUILD_DIR)/core.img: $(ASMOBJECTS) $(COBJECTS) | setup
-	$(LD) $(LDFLAGS) $^ -o $(BUILD_DIR)/core/core
-	objcopy -O binary $(BUILD_DIR)/core/core $@
-
-# Assemble *.asm files
-$(BUILD_DIR)/core/%.o: %.asm
+$(BUILD_DIR)/core/early.bin: setup.asm
 	mkdir -p $(dir $@)
-	$(ASM) $(ASMFLAGS) $< -o $@
+	nasm -fbin $< -o $@
 
-# Compile *.c files
+CORE_ASM_SOURCES := entry.s
+CORE_ASM_OBJECTS := $(patsubst %.s, $(BUILD_DIR)/core/%.o, $(CORE_ASM_SOURCES))
+CORE_ASM_FLAGS := --32
+
+CORE_C_SOURCES := core.c
+CORE_C_OBJECTS := $(patsubst %.c, $(BUILD_DIR)/core/%.o, $(CORE_C_SOURCES))
+CORE_C_FLAGS := -Wall \
+				-Wextra \
+				-ffreestanding \
+				-fno-pic \
+				-m32
+
+CORE_LD_FLAGS := -Tlinker.ld -m elf_i386
+
+$(BUILD_DIR)/core.bin: $(CORE_ASM_OBJECTS) $(CORE_C_OBJECTS) | $(BUILD_DIR)/core/early.bin
+	$(LD) $(CORE_LD_FLAGS) $^ -o $(BUILD_DIR)/core/after.bin
+	cat $(BUILD_DIR)/core/early.bin $(BUILD_DIR)/core/after.bin > $@
+# The MBR sector code reads 10 sectors (1 Sector = 512 bytes) as
+# of now, so to make sure that it isn't picking up random bytes, we will
+# truncate it to 10 sectors (5120 bytes).
+	truncate -s 5120 $@
+
+$(BUILD_DIR)/core/%.o: %.s
+	mkdir -p $(dir $@)
+	$(ASM) $(CORE_ASM_FLAGS) $< -o $@
+
 $(BUILD_DIR)/core/%.o: %.c
 	mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
-
-setup:
-	mkdir -p $(BUILD_DIR)
+	$(CC) $(CORE_C_FLAGS) -c $< -o $@

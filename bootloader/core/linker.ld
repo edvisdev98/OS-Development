@@ -1,25 +1,23 @@
-/* Set the entry point to the `_start` symbol */
-ENTRY(_start)
+OUTPUT_FORMAT("binary")
 
 SECTIONS {
-    . = 0x7E00; /* We expect the core image to be loaded right after MBR */
+    . = 0x7F00; /* We expect the main core image to be situated right after core entry */
 
 	.text : {
+		*(.entry)
 		*(.text)
 	}
-
-	.rodata : {
-		*(.rodata)
-	}
 	
-
-	.data : {
-		*(.data)
-	}
-
 	.bss : {
 		*(.bss)
 		*(COMMON)
 	}
-}
 	
+	.rodata : {
+		*(.rodata)
+	}
+	
+	.data : {
+		*(.data)
+	}
+}
