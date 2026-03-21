@@ -64,7 +64,7 @@ ssh pi@&lt;IP&gt; "tar xzf ksdos-watch.tar.gz && sudo bash ksdos-watch/setup.sh 
 </ul>
 
 
-## ASM EXAMPLES
+## BOOTLOADER EXAMPLES
 
 Assembly language examples are available in the /examples directory.
 
