@@ -63,9 +63,10 @@ ssh pi@&lt;IP&gt; "tar xzf ksdos-watch.tar.gz && sudo bash ksdos-watch/setup.sh 
 <li><code>raspberry/vkbd.c</code> — touch virtual keyboard (C, uinput)</li>
 </ul>
 
-</div>
 
 ## ASM EXAMPLES
 
 <li>You can find assembly examples in (<code>/examples</code>) folder.
+
+</div>
 
