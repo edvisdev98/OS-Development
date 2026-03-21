@@ -70,7 +70,7 @@ Assembly language examples are available in the /examples directory.
 
 ### The directory includes examples such as basic output:
 <ul>
-<li>(/code>HelloWorld.asm, PrintCharacters.asm</code>) - character handling;</li>
+<li>(<code>HelloWorld.asm, PrintCharacters.asm</code>) - character handling;</li>
 <li>(<code>ClearScreen.asm, BackgroundColor.asm, TextFontColor.asm</code>) - display controlling;</li>
 <li>(<code>CheckRAM.asm</code>) - simple interaction with memory.</li>
 </ul>
