@@ -66,7 +66,12 @@ ssh pi@&lt;IP&gt; "tar xzf ksdos-watch.tar.gz && sudo bash ksdos-watch/setup.sh 
 
 ## ASM EXAMPLES
 
-<li>You can find assembly examples in (<code>/examples</code>) folder.
+Assembly language examples are available in the /examples directory.
+
+# The directory includes examples such as basic output: 
+<li>(HelloWorld.asm, PrintCharacters.asm) - character handling;</li>
+<li>(ClearScreen.asm, BackgroundColor.asm, TextFontColor.asm) - display controlling;</li>
+<li>(CheckRAM.asm) - simple interaction with memory.</li>
 
 </div>
 
