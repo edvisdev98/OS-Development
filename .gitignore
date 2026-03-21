@@ -1,1 +1,69 @@
+# Build directories
 build/
+dist/
+
+# Compiled binaries
+*.bin
+*.img
+*.iso
+*.exe
+*.o
+*.elf
+
+# SDK binaries
+sdk/*/bin/*.exe
+sdk/*/lib/*.a
+sdk/*/include/*.h
+
+# Game binaries
+games/*/bin/*.exe
+games/*/build/
+
+# Virtual disk images
+*.vhd
+*.vmdk
+*.qcow2
+
+# Debug files
+*.map
+*.lst
+*.sym
+
+# Temporary files
+*.tmp
+*.bak
+*~
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Log files
+*.log
+*.out
+
+# Configuration files with secrets
+config.local
+.env
+*.cfg
+*.ini
+
+# Test outputs
+test-results/
+coverage/
+
+# Documentation build
+docs/_build/
+*.aux
+*.toc
+*.pdf
+
+# Package files
+*.tar.gz
+*.zip
+*.7z
+*.rar

@@ -1,0 +1,32 @@
+[Unit]
+Description=KSDOS Watch - DOS-like OS on Raspberry Pi TFT
+After=multi-user.target
+Wants=multi-user.target
+
+[Service]
+Type=simple
+User=pi
+Group=video
+
+# Environment for SDL framebuffer output
+Environment="SDL_FBDEV=/dev/fb1"
+Environment="SDL_VIDEODRIVER=fbcon"
+Environment="SDL_NOMOUSE=1"
+
+ExecStart=/home/pi/ksdos/launch.sh
+
+# Restart KSDOS automatically if it exits
+Restart=always
+RestartSec=2
+
+# Access to framebuffer, input devices, and uinput (for virtual keyboard)
+SupplementaryGroups=video input
+DeviceAllow=/dev/uinput rw
+DeviceAllow=/dev/fb1 rw
+DeviceAllow=/dev/input/* rw
+
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,58 @@
+name: C/C++ CI with Release
+
+on:
+  push:
+    branches: [ "main" ]      # build normal ao push na main
+    tags:                      # novo: dispara quando uma tag for criada
+      - 'v*'                   # tags que começam com v (ex: v1.0.0)
+  pull_request:
+    branches: [ "main" ]       # build para PRs (sem release)
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Install NASM
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y nasm
+
+    - uses: actions/checkout@v4
+
+    - name: Compilar com make
+      run: make
+
+    # (Opcional) Se você quiser armazenar o binário gerado para usar em outro job,
+    # pode fazer upload como artefato. Exemplo:
+    - name: Upload binário como artefato
+      uses: actions/upload-artifact@v4
+      with:
+        name: disk.img        # nome do artefato
+        path: ./build/disk.img   # ⚠️ ajuste para o caminho real do seu binário
+        # Exemplo: path: ./meu_programa
+
+  # Job separado para criar a release (executa somente quando for uma tag)
+  release:
+    needs: build                # só executa se o build passar
+    if: startsWith(github.ref, 'refs/tags/v')  # só roda para tags v*
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Baixar artefato do job build
+      uses: actions/download-artifact@v4
+      with:
+        name: disk.img        # mesmo nome usado no upload
+        path: ./build/
+
+    - name: Criar Release
+      uses: softprops/action-gh-release@v2
+      with:
+        name: Release ${{ github.ref_name }}
+        body: |
+              first bin build
+        draft: false
+        prerelease: false
+        files: ./build/*      # anexa todos os arquivos da pasta artefatos
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
