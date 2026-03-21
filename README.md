@@ -1,14 +1,17 @@
-# KSDOS
+# OS DEVELOPMENT
+This repository contains resources for OS development, including KSDOS files and assembly (ASM) examples. It is intended for learning, experimentation, and exploring low-level system concepts such as memory management, boot processes, and hardware interaction.
+
+## KSDOS
 
 16-bit real-mode x86 operating system written in NASM assembly, running in QEMU.
 
-## Architecture
+### Architecture
 
 - **Bootloader + Kernel**: `bootloader/kernel/ksdos.asm` — main kernel entry point
 - **9 Overlays**: CC, MASM, CSC, MUSIC, NET, OPENGL, PSYQ, GOLD4, IDE — loaded on demand via `ovl_api.asm`
 - **Build system**: `Makefile` + `tools/mkimage.pl` — assembles all overlays and embeds them in a FAT12 disk image
 
-## Build
+### Build
 
 ```
 make        # build disk.img
@@ -16,7 +19,7 @@ make run    # run in QEMU (VNC on :0)
 make deploy # package for Raspberry Pi (build/ksdos-watch.tar.gz)
 ```
 
-## Raspberry Pi Deployment
+### Raspberry Pi Deployment
 
 Files in `raspberry/`:
 
@@ -27,7 +30,7 @@ Files in `raspberry/`:
 | `vkbd.c` | Virtual keyboard in C: framebuffer rendering + uinput key injection (no QMP socket) |
 | `ksdos-watch.service` | systemd unit for auto-start on boot |
 
-### Virtual Keyboard (`vkbd.c`)
+#### Virtual Keyboard (`vkbd.c`)
 
 - Renders a QWERTY keyboard on the bottom ~36% of the TFT framebuffer
 - Reads touch events via Linux evdev (`/dev/input/event*`, auto-detected)
@@ -36,7 +39,7 @@ Files in `raspberry/`:
 - Build: `gcc -O2 -o vkbd vkbd.c -lpthread`
 - The `setup.sh` script compiles it automatically on the Pi
 
-### Pi Setup
+#### Pi Setup
 
 ```bash
 make deploy
@@ -44,7 +47,7 @@ scp build/ksdos-watch.tar.gz pi@<IP>:~/
 ssh pi@<IP> "tar xzf ksdos-watch.tar.gz && sudo bash ksdos-watch/setup.sh && sudo reboot"
 ```
 
-## Key Files
+### Key Files
 
 - `bootloader/kernel/ksdos.asm` — kernel main
 - `bootloader/kernel/opengl.asm` — software graphics primitives (guarded with `%ifndef`)
